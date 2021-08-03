@@ -1,0 +1,194 @@
+[colors]
+
+background = #1a2026
+foreground = #e1e6ea
+
+red        = #fb6396
+orange     = #fb7863
+yellow     = #fbb863
+green      = #94cf95
+cyan       = #7fe4d2
+blue       = #6ec1d6
+magenta    = #cd84c8
+grey       = #526170
+
+
+
+[bar/thetek]
+
+width          = 100%:-32
+height         = 40
+offset-x       = 16
+offset-y       = 16
+fixed-center   = true
+
+background     = ${colors.background}
+foreground     = ${colors.foreground}
+border-size    = 0
+radius         = 0
+
+font-0         = "Roboto:size=11;2"
+font-1         = "JetBrainsMono Nerd Font:size=13;3"
+font-2         = "JetBrainsMono Nerd Font:size=15;3"
+
+modules-left   = archlogo bspwm
+modules-center = time weather
+modules-right  = cpu memory space pulseaudio powermenu
+
+
+
+[module/space]
+type = custom/text
+content = "   "
+
+
+
+[module/archlogo]
+
+type                = custom/text
+content             = "   "
+content-foreground  = ${colors.red}
+content-font        = 3
+
+
+
+[module/bspwm]
+
+type                      = internal/bspwm
+
+pin-workspaces            = true
+inline-mode               = false
+enable-click              = true
+enable-scroll             = true
+reverse-scroll            = true
+
+format                    = %{T2}<label-state>%{T-}
+
+label-focused-foreground  = ${colors.red}
+label-occupied-foreground = ${colors.foreground}
+label-urgent-foreground   = ${colors.green}
+label-empty-foreground    = ${colors.grey}
+
+label-separator           = " "
+
+
+
+[module/time]
+
+type                     = internal/date
+interval                 = 10
+
+time                     = "%H:%M"
+label                    = %time%
+
+format-padding           = 1
+
+format-prefix            = " "
+format-prefix-font       = 3
+format-prefix-foreground = ${colors.green}
+
+
+
+[module/pulseaudio]
+
+type                        = internal/pulseaudio
+
+format-volume               = <ramp-volume>  <bar-volume>  <label-volume>
+label-volume                = %percentage%
+label-volume-foreground     = ${colors.blue}
+
+label-muted                 = %{T3}ﱝ %{T-}muted
+label-muted-foreground      = ${colors.grey}
+
+ramp-volume-0               = 奄
+ramp-volume-1               = 奔
+ramp-volume-2               = 墳
+ramp-volume-foreground      = ${colors.blue}
+ramp-volume-font            = 3
+
+bar-volume-width            = 7
+bar-volume-foreground-0     = ${colors.blue}
+bar-volume-foreground       = ${colors.blue}
+bar-volume-indicator        =
+bar-volume-fill             = 
+bar-volume-empty            = 
+bar-volume-empty-foreground = ${colors.grey}
+
+format-volume-padding       = 4
+format-muted-padding        = 4
+
+
+
+[module/powermenu]
+
+type                       = custom/menu
+expand-right               = true
+format-spacing             = 1
+
+label-open                 = " 襤 "
+label-open-foreground      = ${colors.red}
+label-open-font            = 3
+label-close                = "  "
+label-close-foreground     = ${colors.grey}
+label-close-font           = 3
+label-separator            =
+label-separator-foreground = ${colors.foreground}
+
+menu-0-0                   = "﫼 "
+menu-0-0-exec              = menu-open-1
+menu-0-0-foreground        = ${colors.green}
+menu-0-0-font              = 3
+menu-0-1                   = "ﰇ "
+menu-0-1-exec              = menu-open-2
+menu-0-1-foreground        = ${colors.yellow}
+menu-0-1-font              = 3
+menu-0-2                   = "襤 "
+menu-0-2-exec              = menu-open-3
+menu-0-2-foreground        = ${colors.red}
+menu-0-2-font              = 3
+
+menu-1-0                   = "﫼 "
+menu-1-0-exec              = bspc quit
+menu-1-0-foreground        = ${colors.green}
+menu-1-0-font              = 3
+
+menu-2-0                   = "ﰇ "
+menu-2-0-exec              = reboot
+menu-2-0-foreground        = ${colors.yellow}
+menu-2-0-font              = 3
+
+menu-3-0                   = "襤 "
+menu-3-0-exec              = poweroff
+menu-3-0-foreground        = ${colors.red}
+menu-3-0-font              = 3
+
+format-padding             = 1
+
+
+
+[module/weather]
+
+type              = custom/script
+exec              = python3 ~/.config/polybar/forecast.py
+exec-if           = ping openweathermap.org -c 1
+interval          = 900
+format-padding    = 1
+
+
+
+[module/cpu]
+
+type                     = internal/cpu
+interval                 = 5
+format-prefix            = "  "
+format-prefix-font       = 3
+format-prefix-foreground = ${colors.yellow}
+label                    = "%percentage:2%"
+format-padding           = 1
+
+[module/memory]
+
+type           = internal/memory
+interval       = 5
+label          = "%{F#566066}|%{F-} %percentage_used:2%"
+format-padding = 1

@@ -1,0 +1,126 @@
+####          ####
+## APPLICATIONS ##
+####          ####
+
+
+# terminal emulator
+super + t
+    /opt/kitty/kitty/launcher/kitty
+
+# nautilus
+super + e
+    nautilus
+
+# firefox
+super + w
+    firefox
+
+# signal
+super + g
+    signal-desktop
+
+# atom
+super + a
+    atom
+
+# vscodium
+super + v
+    codium
+
+# rofi
+super + space
+    rofi -show run
+
+# flameshot
+Print
+    flameshot gui
+
+
+
+####         ####
+## BSPWM STUFF ##
+####         ####
+
+
+#### QUIT, RESTART, RELOAD ####
+
+# quit / restart bspwm
+super + alt + {q,r}
+    bspc {quit,wm -r}
+
+# reload sxhkd
+super + alt + Escape
+    pkill -USR1 -x sxhkd
+
+
+
+#### WINDOW CONTROLS ####
+
+# close / kill window
+super {_,shift + }q
+    bspc node -{c,k}
+
+# tiled <-> monocle layout
+super + m
+    bspc desktop -l next
+
+
+
+#### WINDOW MOVEMENT ####
+
+# swap current node and biggest window
+super + g
+    bspc node -s biggest.window
+
+# set window state
+super + {b,shift + b,n,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# focus / move node in direction
+super + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+
+# focus next / previous window in current desktop
+super + {_,shift + }v
+    bspc node -f {next,prev}.local.!hidden.window
+
+# focus last node / desktop
+super + {grave,Tab}
+    bspc {node,desktop} -f last
+
+# focus or send to given desktop
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
+
+# expand window
+super + {u,i,o,p}
+    bspc node -z {left -16 0,bottom 0 16,top 0 -16,right 16 0}
+
+# contract window
+super + shift + {u,i,o,p}
+    bspc node -z {left 16 0,bottom 0 -16,top 0 16,right -16 0}
+
+# move floating window
+super + {Left,Down,Up,Right}
+    bspc node -v {-16 0,0 16,0 -16,16 0}
+
+
+
+#### PRESELECT ####
+
+# preselect direction
+super + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
+
+# preselect ratio
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# cancel preselect for node
+super + ctrl + space
+    bspc node -p cancel
+
+# cancel preselect for desktop
+super + ctrl + shift + space
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+

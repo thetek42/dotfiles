@@ -1,0 +1,82 @@
+* {
+  bg:          #191a28;
+  bg2:         #212234;
+  grey:        #444b6a;
+  fg:          #a0a8cd;
+  red:         #ee6d85;
+  orange:      #f6955b;
+  yellow:      #d7a65f;
+  green:       #95c561;
+  cyan:        #38a89d;
+  blue:        #7199ee;
+  purple:      #a485dd;
+  transparent: #00000000;
+}
+
+
+
+window, mainbox {
+  background-color: @transparent;
+  width: 720px;
+}
+
+inputbar {
+  children: [prompt,entry];
+  background-color: @bg;
+  border-radius: 20px;
+}
+
+prompt {
+  padding: 8px 8px 8px 12px;
+  background-color: @bg;
+  text-color: @red;
+}
+
+textbox {
+  background-color: @bg;
+  border-color: @grey;
+  padding: 4px 8px;
+}
+
+entry {
+  padding: 8px 0;
+  background-color: @bg;
+  text-color: @fg;
+}
+
+listview {
+  cycle: false;
+  background-color: @bg;
+  margin: 8px 0 0 0;
+  border-radius: 16px;
+  lines: 10;
+}
+
+element {
+  padding: 8px 10px;
+  background-color: @bg;
+  text-color: @fg;
+  border-radius: 16px;
+}
+
+element selected {
+  background-color: @bg2;
+}
+
+element-text, element-icon {
+  background-color: inherit;
+  text-color: inherit;
+}
+
+element-text {
+  margin: 0 0 0 6px;
+}
+
+message {
+  margin: 8px 0 0 0;
+  border-radius: 16px;
+  text-color: @fg;
+  background-color: @bg;
+  padding: 4px 4px;
+}
+
